@@ -250,12 +250,8 @@ textarea { height: 120px; resize: vertical; }
 }
 @media (max-width: 480px) {
     .prompt-actions {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 4px;
-    }
-    .prompt-actions .btn-download {
-        grid-column: 1 / -1;
-        margin-top: 4px;
     }
 }
 .btn-copy, .btn-download, .btn-save {
