@@ -77,14 +77,13 @@ h1 {
     width: 0%;
     background: var(--bremen-red);
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
     position: relative;
     overflow: visible;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 12px;
+    border-radius: 0;
 }
 .progress-category-info {
     font-size: 0.75rem;

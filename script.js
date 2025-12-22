@@ -109,6 +109,11 @@ function updateProgressBar() {
     const progressBar = document.getElementById('progressBar');
     progressBar.style.width = `${percentage}%`;
     
+    // Entferne border-radius wenn 100% erreicht
+    if (percentage >= 100) {
+        progressBar.style.borderRadius = '0';
+    }
+    
     // Kategorie-Info im Fortschrittsbalken anzeigen
     if (currentStep < questions.length) {
         const q = questions[currentStep];
