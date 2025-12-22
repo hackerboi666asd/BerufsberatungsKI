@@ -174,7 +174,7 @@ WICHTIG ZUR ANALYSE:
 - "Lernen" praxisorientiert = Eher handwerkliche/duale Ausbildung.
 
 STRUKTUR DEINER ANTWORT:
-1. Schlage 3-5 konkrete Berufe oder Berufsfelder vor. 
+1. Schlage 5 konkrete Berufe oder Berufsfelder vor. 
    WICHTIG: Mische dabei gängige Berufe mit mindestens einem eher ungewöhnlichen oder weniger bekannten Beruf, der aber gut passen könnte.
 2. Erkläre bei jedem Beruf kurz, warum er zu den Antworten passt.
 3. Beende deine Antwort IMMER mit einer offenen Frage, um ein Gespräch zu starten.
