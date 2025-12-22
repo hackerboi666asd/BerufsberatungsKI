@@ -57,13 +57,13 @@ let currentStep = 0;
 let answers = {};
 let graduation = "";
 let lastActiveScreen = 'intro';
+let lastCategory = null;
 
 // DOM Referenzen
 const screens = {
     intro: document.getElementById('intro-screen'),
     quiz: document.getElementById('quiz-screen'),
     text: document.getElementById('text-screen'),
-    summary: document.getElementById('summary-screen'),
     result: document.getElementById('result-screen'),
     info: document.getElementById('info-screen') 
 };
@@ -106,47 +106,31 @@ function updateProgressBar() {
     const totalSteps = questions.length + 2; 
     const currentProgress = currentStep + 1; 
     const percentage = (currentProgress / totalSteps) * 100;
-    document.getElementById('progressBar').style.width = `${percentage}%`;
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.width = `${percentage}%`;
+    
+    // Kategorie-Info im Fortschrittsbalken anzeigen
+    if (currentStep < questions.length) {
+        const q = questions[currentStep];
+        const categoryInfo = document.getElementById('progressCategoryInfo');
+        if (categoryInfo) {
+            // Zähle Fragen in dieser Kategorie
+            const categoryQuestions = questions.filter(qq => qq.category === q.category);
+            const categoryIndex = categoryQuestions.findIndex(qq => qq.id === q.id);
+            const categoryProgress = categoryIndex + 1;
+            const categoryTotal = categoryQuestions.length;
+            
+            categoryInfo.textContent = `${q.category} ${categoryProgress}/${categoryTotal}`;
+            categoryInfo.style.display = 'block';
+        }
+    } else {
+        const categoryInfo = document.getElementById('progressCategoryInfo');
+        if (categoryInfo) {
+            categoryInfo.style.display = 'none';
+        }
+    }
 }
 
-// --- Kategorie-Fortschritt ---
-function updateCategoryProgress() {
-    const categoryProgress = document.getElementById('categoryProgress');
-    if (!categoryProgress) return;
-    
-    // Zähle Fragen pro Kategorie
-    const categoryCounts = {};
-    const categoryAnswered = {};
-    
-    questions.forEach((q, index) => {
-        if (!categoryCounts[q.category]) {
-            categoryCounts[q.category] = 0;
-            categoryAnswered[q.category] = 0;
-        }
-        categoryCounts[q.category]++;
-        if (index < currentStep && answers[q.id] !== undefined) {
-            categoryAnswered[q.category]++;
-        }
-    });
-    
-    // Erstelle Fortschrittsanzeige
-    let html = '<div class="category-progress-grid">';
-    for (const [category, total] of Object.entries(categoryCounts)) {
-        const answered = categoryAnswered[category] || 0;
-        const percentage = total > 0 ? (answered / total) * 100 : 0;
-        html += `
-            <div class="category-progress-item">
-                <div class="category-progress-label">${category}</div>
-                <div class="category-progress-bar">
-                    <div class="category-progress-fill" style="width: ${percentage}%"></div>
-                </div>
-                <div class="category-progress-text">${answered}/${total}</div>
-            </div>
-        `;
-    }
-    html += '</div>';
-    categoryProgress.innerHTML = html;
-}
 
 // --- Motivations-Feedback ---
 function showToast(message, type = 'success') {
@@ -196,6 +180,7 @@ function startQuiz() {
     graduation = gradSelect.value;
     currentStep = 0; 
     answers = {}; // Reset answers
+    lastCategory = null; // Reset category tracking
     showScreen('quiz');
     renderQuestion();
     updateProgressBar();
@@ -213,8 +198,12 @@ function renderQuestion() {
         btn.style.background = '#F9FAFB';
     });
     
-    // Kategorie-Fortschritt aktualisieren
-    updateCategoryProgress();
+    // Motivations-Feedback nur bei Kategorie-Wechsel
+    if (lastCategory !== null && lastCategory !== q.category) {
+        const message = getMotivationalMessage(currentStep, questions.length);
+        showToast(message);
+    }
+    lastCategory = q.category;
 }
 
 function answer(value) {
@@ -228,12 +217,6 @@ function answer(value) {
     if(btns[btnIndex]) {
         btns[btnIndex].style.borderColor = '#CE1126'; // Bremer Rot
         btns[btnIndex].style.background = '#FFEBEE'; // Hellrot
-    }
-
-    // Motivations-Feedback
-    if (currentStep < questions.length - 1) {
-        const message = getMotivationalMessage(currentStep + 1, questions.length);
-        showToast(message);
     }
 
     // Weiter zur nächsten Frage
@@ -410,10 +393,6 @@ function generateProfileSummary() {
     summaryDiv.innerHTML = html;
 }
 
-function showPrompt() {
-    showScreen('result');
-}
-
 // --- Ergebnis ---
 
 function finishQuiz() {
@@ -465,10 +444,8 @@ ANTWORTEN (Skala 1-4):
 
     document.getElementById('finalPrompt').value = prompt;
     
-    // Zeige zuerst die Profil-Zusammenfassung
-    drawRadarChart();
-    generateProfileSummary();
-    showScreen('summary');
+    // Direkt zum Prompt
+    showScreen('result');
 }
 
 function copyToClipboard() {
