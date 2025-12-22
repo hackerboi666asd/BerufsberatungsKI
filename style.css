@@ -122,10 +122,12 @@ main {
 .card {
     background: var(--bg-card);
     border-radius: var(--radius-l);
-    padding: 30px 25px;
+    padding: 20px 18px;
     box-shadow: var(--shadow-soft);
     text-align: center;
     border: 1px solid rgba(255,255,255,0.5);
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
 }
 
 .hero-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
@@ -196,8 +198,8 @@ textarea { height: 120px; resize: vertical; }
 .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .option-btn {
@@ -243,7 +245,18 @@ textarea { height: 120px; resize: vertical; }
 .prompt-actions {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
+    max-width: 100%;
+}
+@media (max-width: 480px) {
+    .prompt-actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+    }
+    .prompt-actions .btn-download {
+        grid-column: 1 / -1;
+        margin-top: 4px;
+    }
 }
 .btn-copy, .btn-download, .btn-save {
     padding: 12px; border-radius: var(--radius-s);

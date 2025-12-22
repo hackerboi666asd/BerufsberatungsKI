@@ -159,19 +159,29 @@ function showToast(message, type = 'success') {
 function getMotivationalMessage(step, total) {
     const percentage = (step / total) * 100;
     const messages = [
-        { threshold: 0, text: 'Los geht\'s! 💪' },
-        { threshold: 25, text: 'Super Start! 🌟' },
-        { threshold: 50, text: 'Du schaffst das! 🚀' },
-        { threshold: 75, text: 'Fast geschafft! ⭐' },
-        { threshold: 90, text: 'Letzte Fragen! 🎯' }
+        { threshold: 25, text: '25% geschafft!' },
+        { threshold: 50, text: '50% geschafft!' },
+        { threshold: 75, text: '75% geschafft!' },
+        { threshold: 90, text: 'Fast fertig!' }
     ];
-    
+
     for (let i = messages.length - 1; i >= 0; i--) {
         if (percentage >= messages[i].threshold) {
             return messages[i].text;
         }
     }
-    return 'Weiter so! ✨';
+    return 'Weiter so!';
+}
+
+// --- Swipe Feedback ---
+function addSwipeFeedback(button) {
+    button.style.transform = 'scale(0.96)';
+    button.style.boxShadow = '0 2px 8px rgba(206, 17, 38, 0.2)';
+}
+
+function removeSwipeFeedback(button) {
+    button.style.transform = '';
+    button.style.boxShadow = '';
 }
 
 // --- Quiz Logik ---
@@ -461,7 +471,7 @@ function copyToClipboard() {
         const originalContent = btn.innerHTML;
         btn.innerHTML = '<i class="ph-bold ph-check"></i> Kopiert!';
         btn.style.background = '#10B981'; // Grün für Erfolg
-        showToast('Prompt kopiert! 📋');
+        showToast('Prompt kopiert!');
         setTimeout(() => {
             btn.innerHTML = originalContent;
             btn.style.background = '#1F2937';
@@ -481,7 +491,7 @@ function downloadPrompt() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast('Prompt heruntergeladen! 💾');
+    showToast('Prompt heruntergeladen!');
 }
 
 // --- Speichern/Laden mit localStorage ---
@@ -496,17 +506,17 @@ function saveResult() {
         hobbies: document.getElementById('hobbiesInput').value.trim(),
         wishes: document.getElementById('wishesInput').value.trim()
     };
-    
+
     let savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
     savedResults.push(resultData);
-    
+
     // Maximal 10 Ergebnisse speichern
     if (savedResults.length > 10) {
         savedResults = savedResults.slice(-10);
     }
-    
+
     localStorage.setItem('berufsberatung_results', JSON.stringify(savedResults));
-    showToast('Ergebnis gespeichert! 💾');
+    showToast('Ergebnis gespeichert!');
     loadSavedResults();
 }
 
@@ -558,10 +568,10 @@ function loadSavedResults() {
 function loadResult(index) {
     const savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
     if (index < 0 || index >= savedResults.length) return;
-    
+
     const result = savedResults[savedResults.length - 1 - index];
     document.getElementById('finalPrompt').value = result.prompt;
-    showToast('Ergebnis geladen! 📂');
+    showToast('Ergebnis geladen!');
 }
 
 function deleteResult(index) {
@@ -570,7 +580,7 @@ function deleteResult(index) {
     savedResults.splice(actualIndex, 1);
     localStorage.setItem('berufsberatung_results', JSON.stringify(savedResults));
     loadSavedResults();
-    showToast('Ergebnis gelöscht! 🗑️');
+    showToast('Ergebnis gelöscht!');
 }
 
 // Lade gespeicherte Ergebnisse beim Öffnen des Result-Screens
