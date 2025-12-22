@@ -61,6 +61,8 @@
                 </div>
                 <h3 id="questionText">Frage...</h3>
                 
+                <div class="category-progress" id="categoryProgress"></div>
+                
                 <div class="options-grid">
                     <button class="option-btn" onclick="answer(1)">
                         <span class="emoji">⛔</span>
@@ -107,6 +109,24 @@
             </div>
         </section>
 
+        <section id="summary-screen" class="screen hidden">
+            <div class="card summary-card">
+                <div class="hero-icon">📊</div>
+                <h2>Dein Profil</h2>
+                <p>Hier siehst du eine Übersicht deiner Stärken und Interessen.</p>
+                
+                <div class="profile-visualization">
+                    <canvas id="radarChart" width="300" height="300"></canvas>
+                </div>
+                
+                <div class="profile-summary" id="profileSummary"></div>
+                
+                <button class="btn-primary" onclick="showPrompt()">
+                    Weiter zum Prompt <i class="ph-bold ph-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
         <section id="result-screen" class="screen hidden">
             <div class="card result-card">
                 <div class="hero-icon">🎉</div>
@@ -115,9 +135,22 @@
                 
                 <div class="prompt-box">
                     <textarea id="finalPrompt" readonly onclick="this.select()"></textarea>
-                    <button id="copyBtn" class="btn-copy" onclick="copyToClipboard()">
-                        <i class="ph-bold ph-copy"></i> Kopieren
-                    </button>
+                    <div class="prompt-actions">
+                        <button id="copyBtn" class="btn-copy" onclick="copyToClipboard()">
+                            <i class="ph-bold ph-copy"></i> Kopieren
+                        </button>
+                        <button id="downloadBtn" class="btn-download" onclick="downloadPrompt()">
+                            <i class="ph-bold ph-download"></i> Download
+                        </button>
+                        <button id="saveBtn" class="btn-save" onclick="saveResult()">
+                            <i class="ph-bold ph-floppy-disk"></i> Speichern
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="saved-results-section" id="savedResultsSection" style="display: none;">
+                    <h3><i class="ph-fill ph-bookmark"></i> Gespeicherte Ergebnisse</h3>
+                    <div id="savedResultsList"></div>
                 </div>
 
                 <div class="ai-links-section">
@@ -208,6 +241,8 @@
             </div>
         </button>
     </nav>
+    
+    <div id="toast" class="toast"></div>
 
     <script src="script.js"></script>
 </body>

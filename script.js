@@ -1,40 +1,55 @@
-// --- Fragenkatalog ---
+// --- Fragenkatalog (Erweitert auf 35 Fragen) ---
 const questions = [
-    // Arbeitsverhalten
+    // 1. Arbeitsverhalten & Arbeitsweise
     { id: 'arb_zuverlaessig', category: 'Arbeitsweise', text: 'Ich halte mich genau an Absprachen und Regeln.' },
-    { id: 'arb_tempo', category: 'Arbeitsweise', text: 'Ich werde mit Aufgaben in der Schule meistens rechtzeitig fertig.' },
     { id: 'arb_plan', category: 'Arbeitsweise', text: 'Bevor ich anfange, mache ich mir einen Plan.' },
     { id: 'arb_org', category: 'Arbeitsweise', text: 'Ich organisiere gerne, wer in einer Gruppe was macht.' },
-    { id: 'arb_geschick', category: 'Arbeitsweise', text: 'Ich bin geschickt im Umgang mit Werkzeug oder Bastelmaterial.' },
     { id: 'arb_ordung', category: 'Arbeitsweise', text: 'Mein Arbeitsplatz ist meistens ordentlich.' },
-    { id: 'arb_kreativ', category: 'Arbeitsweise', text: 'Ich habe oft neue Ideen und bin kreativ.' },
-    { id: 'arb_problem', category: 'Arbeitsweise', text: 'Ich löse gerne knifflige Aufgaben oder Rätsel.' },
+    { id: 'arb_tempo', category: 'Arbeitsweise', text: 'Ich arbeite zügig und werde rechtzeitig fertig.' },
+    { id: 'arb_routine', category: 'Arbeitsweise', text: 'Ich mag feste Abläufe, bei denen ich genau weiß, was zu tun ist.' }, // NEU: Routine vs. Chaos
 
-    // Lernverhalten
+    // 2. Lernverhalten & Denken
     { id: 'lern_selbst', category: 'Lernen', text: 'Ich kann Aufgaben erledigen, ohne ständig nachzufragen.' },
     { id: 'lern_ausdauer', category: 'Lernen', text: 'Wenn etwas schwierig ist, gebe ich nicht auf.' },
     { id: 'lern_konz', category: 'Lernen', text: 'Ich kann mich lange auf eine Sache konzentrieren.' },
     { id: 'lern_kapier', category: 'Lernen', text: 'Ich verstehe neue Dinge und Zusammenhänge schnell.' },
-    { id: 'lern_motiv', category: 'Lernen', text: 'Ich lerne gerne neue Dinge.' },
+    { id: 'lern_problem', category: 'Lernen', text: 'Ich löse gerne knifflige Rätsel oder logische Probleme.' },
 
-    // Sozialverhalten
-    { id: 'soz_team', category: 'Soziales', text: 'Ich arbeite gerne im Team.' },
-    { id: 'soz_hilfe', category: 'Soziales', text: 'Ich helfe anderen gerne.' },
-    { id: 'soz_kontakt', category: 'Soziales', text: 'Es fällt mir leicht, auf fremde Menschen zuzugehen.' },
-    { id: 'soz_empathie', category: 'Soziales', text: 'Ich merke schnell, wie sich andere fühlen.' },
+    // 3. Sozialverhalten
+    { id: 'soz_team', category: 'Soziales', text: 'Ich arbeite lieber im Team als alleine.' },
+    { id: 'soz_kontakt', category: 'Soziales', text: 'Es fällt mir leicht, fremde Menschen anzusprechen.' },
+    { id: 'soz_empathie', category: 'Soziales', text: 'Ich merke schnell, wenn es anderen nicht gut geht.' },
     { id: 'soz_streit', category: 'Soziales', text: 'Bei Streit versuche ich zu schlichten.' },
+    { id: 'soz_fuehrung', category: 'Soziales', text: 'Ich übernehme gerne die Verantwortung für eine Gruppe.' }, // NEU: Führung
 
-    // Fachkompetenzen / Interessen
-    { id: 'fach_schreib', category: 'Interessen', text: 'Ich schreibe gerne Texte.' },
-    { id: 'fach_mathe', category: 'Interessen', text: 'Ich kann gut mit Zahlen umgehen.' },
-    { id: 'fach_natwi', category: 'Interessen', text: 'Bio, Chemie oder Physik interessieren mich.' },
-    { id: 'fach_sprache', category: 'Interessen', text: 'Ich spreche oder lerne gerne Sprachen.' },
-    { id: 'fach_pc', category: 'Interessen', text: 'Ich arbeite gerne am Computer.' },
-    { id: 'fach_vernetz', category: 'Interessen', text: 'Ich kann Wissen gut verknüpfen.' },
+    // 4. Interessen & Fachkompetenzen (Stark erweitert)
+    // Handwerk & Technik
+    { id: 'fach_handwerk', category: 'Interessen', text: 'Ich arbeite gerne mit meinen Händen (Bauen, Reparieren, Basteln).' }, // NEU
+    { id: 'fach_technik', category: 'Interessen', text: 'Mich interessiert, wie Maschinen oder Technik funktionieren.' }, // NEU
+    
+    // PC & Medien
+    { id: 'fach_pc', category: 'Interessen', text: 'Ich kenne mich gut am Computer aus und löse PC-Probleme selbst.' },
+    { id: 'fach_medien', category: 'Interessen', text: 'Ich erstelle gerne Fotos, Videos oder Social-Media Posts.' }, // NEU
+    
+    // Kreativität
+    { id: 'fach_kunst', category: 'Interessen', text: 'Ich bin kreativ und gestalte gerne Dinge (Zeichnen, Design).' }, // NEU
+    { id: 'fach_schreib', category: 'Interessen', text: 'Ich schreibe gerne Texte oder Geschichten.' },
+    
+    // Theorie & Zahlen
+    { id: 'fach_mathe', category: 'Interessen', text: 'Ich kann gut mit Zahlen umgehen und rechne gerne.' },
+    { id: 'fach_natwi', category: 'Interessen', text: 'Naturwissenschaften (Bio, Chemie, Physik) finde ich spannend.' },
+    { id: 'fach_sprache', category: 'Interessen', text: 'Ich spreche oder lerne gerne Fremdsprachen.' },
+    
+    // Menschen & Service
+    { id: 'fach_pflege', category: 'Interessen', text: 'Ich kümmere mich gerne um Menschen, die Hilfe brauchen.' }, // NEU
+    { id: 'fach_kinder', category: 'Interessen', text: 'Ich beschäftige mich gerne mit Kindern.' }, // NEU
+    { id: 'fach_verkauf', category: 'Interessen', text: 'Ich kann andere gut von meiner Meinung überzeugen oder Dinge verkaufen.' }, // NEU
 
-    // Präferenzen
-    { id: 'env_buero', category: 'Typfrage', text: 'Ich möchte lieber im Büro arbeiten als draußen/in einer Halle.' },
-    { id: 'env_menschen', category: 'Typfrage', text: 'Ich möchte den ganzen Tag mit Menschen reden.' }
+    // 5. Typ & Umgebung
+    { id: 'env_buero', category: 'Typfrage', text: 'Ich möchte später lieber im Büro arbeiten als in einer Werkstatt.' },
+    { id: 'env_draussen', category: 'Typfrage', text: 'Ich bin gerne draußen, egal wie das Wetter ist.' }, // NEU
+    { id: 'env_koerper', category: 'Typfrage', text: 'Ich möchte mich bei der Arbeit körperlich anstrengen (Anpacken).' }, // NEU
+    { id: 'env_unterwegs', category: 'Typfrage', text: 'Ich fände es toll, beruflich viel unterwegs zu sein (Fahrzeuge, Reisen).' } // NEU
 ];
 
 // State
@@ -48,6 +63,7 @@ const screens = {
     intro: document.getElementById('intro-screen'),
     quiz: document.getElementById('quiz-screen'),
     text: document.getElementById('text-screen'),
+    summary: document.getElementById('summary-screen'),
     result: document.getElementById('result-screen'),
     info: document.getElementById('info-screen') 
 };
@@ -93,6 +109,82 @@ function updateProgressBar() {
     document.getElementById('progressBar').style.width = `${percentage}%`;
 }
 
+// --- Kategorie-Fortschritt ---
+function updateCategoryProgress() {
+    const categoryProgress = document.getElementById('categoryProgress');
+    if (!categoryProgress) return;
+    
+    // Zähle Fragen pro Kategorie
+    const categoryCounts = {};
+    const categoryAnswered = {};
+    
+    questions.forEach((q, index) => {
+        if (!categoryCounts[q.category]) {
+            categoryCounts[q.category] = 0;
+            categoryAnswered[q.category] = 0;
+        }
+        categoryCounts[q.category]++;
+        if (index < currentStep && answers[q.id] !== undefined) {
+            categoryAnswered[q.category]++;
+        }
+    });
+    
+    // Erstelle Fortschrittsanzeige
+    let html = '<div class="category-progress-grid">';
+    for (const [category, total] of Object.entries(categoryCounts)) {
+        const answered = categoryAnswered[category] || 0;
+        const percentage = total > 0 ? (answered / total) * 100 : 0;
+        html += `
+            <div class="category-progress-item">
+                <div class="category-progress-label">${category}</div>
+                <div class="category-progress-bar">
+                    <div class="category-progress-fill" style="width: ${percentage}%"></div>
+                </div>
+                <div class="category-progress-text">${answered}/${total}</div>
+            </div>
+        `;
+    }
+    html += '</div>';
+    categoryProgress.innerHTML = html;
+}
+
+// --- Motivations-Feedback ---
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    const emojis = {
+        success: ['🎉', '✨', '👏', '💪', '🚀', '⭐'],
+        info: ['💡', '📝', '🎯']
+    };
+    
+    const emoji = emojis[type] ? emojis[type][Math.floor(Math.random() * emojis[type].length)] : '✨';
+    toast.textContent = `${emoji} ${message}`;
+    toast.className = `toast toast-${type} toast-show`;
+    
+    setTimeout(() => {
+        toast.classList.remove('toast-show');
+    }, 2000);
+}
+
+function getMotivationalMessage(step, total) {
+    const percentage = (step / total) * 100;
+    const messages = [
+        { threshold: 0, text: 'Los geht\'s! 💪' },
+        { threshold: 25, text: 'Super Start! 🌟' },
+        { threshold: 50, text: 'Du schaffst das! 🚀' },
+        { threshold: 75, text: 'Fast geschafft! ⭐' },
+        { threshold: 90, text: 'Letzte Fragen! 🎯' }
+    ];
+    
+    for (let i = messages.length - 1; i >= 0; i--) {
+        if (percentage >= messages[i].threshold) {
+            return messages[i].text;
+        }
+    }
+    return 'Weiter so! ✨';
+}
+
 // --- Quiz Logik ---
 
 function startQuiz() {
@@ -103,6 +195,7 @@ function startQuiz() {
     }
     graduation = gradSelect.value;
     currentStep = 0; 
+    answers = {}; // Reset answers
     showScreen('quiz');
     renderQuestion();
     updateProgressBar();
@@ -119,6 +212,9 @@ function renderQuestion() {
         btn.style.borderColor = 'transparent';
         btn.style.background = '#F9FAFB';
     });
+    
+    // Kategorie-Fortschritt aktualisieren
+    updateCategoryProgress();
 }
 
 function answer(value) {
@@ -132,6 +228,12 @@ function answer(value) {
     if(btns[btnIndex]) {
         btns[btnIndex].style.borderColor = '#CE1126'; // Bremer Rot
         btns[btnIndex].style.background = '#FFEBEE'; // Hellrot
+    }
+
+    // Motivations-Feedback
+    if (currentStep < questions.length - 1) {
+        const message = getMotivationalMessage(currentStep + 1, questions.length);
+        showToast(message);
     }
 
     // Weiter zur nächsten Frage
@@ -158,11 +260,166 @@ function prevStep() {
     }
 }
 
+// --- Profil-Analyse & Visualisierung ---
+function calculateCategoryScores() {
+    const categoryScores = {};
+    const categoryCounts = {};
+    
+    questions.forEach(q => {
+        if (!categoryScores[q.category]) {
+            categoryScores[q.category] = 0;
+            categoryCounts[q.category] = 0;
+        }
+        const val = answers[q.id];
+        if (val !== undefined) {
+            categoryScores[q.category] += val;
+            categoryCounts[q.category]++;
+        }
+    });
+    
+    // Berechne Durchschnitt pro Kategorie (0-4 Skala)
+    const categoryAverages = {};
+    for (const [category, total] of Object.entries(categoryScores)) {
+        const count = categoryCounts[category];
+        categoryAverages[category] = count > 0 ? total / count : 0;
+    }
+    
+    return categoryAverages;
+}
+
+function drawRadarChart() {
+    const canvas = document.getElementById('radarChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) - 30;
+    
+    const categoryScores = calculateCategoryScores();
+    const categories = Object.keys(categoryScores);
+    const numCategories = categories.length;
+    
+    if (numCategories === 0) return;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw grid circles
+    ctx.strokeStyle = '#E5E7EB';
+    ctx.lineWidth = 1;
+    for (let i = 1; i <= 4; i++) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, (radius * i) / 4, 0, Math.PI * 2);
+        ctx.stroke();
+    }
+    
+    // Draw axes
+    ctx.strokeStyle = '#D1D5DB';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < numCategories; i++) {
+        const angle = (Math.PI * 2 * i) / numCategories - Math.PI / 2;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+    
+    // Draw data polygon
+    ctx.fillStyle = 'rgba(206, 17, 38, 0.2)';
+    ctx.strokeStyle = '#CE1126';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    for (let i = 0; i < numCategories; i++) {
+        const angle = (Math.PI * 2 * i) / numCategories - Math.PI / 2;
+        const score = categoryScores[categories[i]]; // 0-4
+        const value = (score / 4) * radius; // Normalize to 0-1, then scale to radius
+        const x = centerX + Math.cos(angle) * value;
+        const y = centerY + Math.sin(angle) * value;
+        
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    
+    // Draw labels
+    ctx.fillStyle = '#1F2937';
+    ctx.font = 'bold 11px Inter';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    for (let i = 0; i < numCategories; i++) {
+        const angle = (Math.PI * 2 * i) / numCategories - Math.PI / 2;
+        const labelX = centerX + Math.cos(angle) * (radius + 20);
+        const labelY = centerY + Math.sin(angle) * (radius + 20);
+        ctx.fillText(categories[i], labelX, labelY);
+    }
+}
+
+function generateProfileSummary() {
+    const categoryScores = calculateCategoryScores();
+    const summaryDiv = document.getElementById('profileSummary');
+    if (!summaryDiv) return;
+    
+    // Sortiere Kategorien nach Score
+    const sortedCategories = Object.entries(categoryScores)
+        .sort((a, b) => b[1] - a[1]);
+    
+    let html = '<div class="summary-stats">';
+    
+    // Top 3 Stärken
+    html += '<div class="summary-section"><h4>💪 Deine Top-Stärken</h4><div class="strength-list">';
+    sortedCategories.slice(0, 3).forEach(([category, score]) => {
+        const percentage = (score / 4) * 100;
+        html += `
+            <div class="strength-item">
+                <div class="strength-label">${category}</div>
+                <div class="strength-bar">
+                    <div class="strength-fill" style="width: ${percentage}%"></div>
+                </div>
+                <div class="strength-value">${percentage.toFixed(0)}%</div>
+            </div>
+        `;
+    });
+    html += '</div></div>';
+    
+    // Alle Kategorien
+    html += '<div class="summary-section"><h4>📊 Alle Bereiche</h4><div class="all-categories">';
+    sortedCategories.forEach(([category, score]) => {
+        const percentage = (score / 4) * 100;
+        const emoji = percentage >= 75 ? '⭐' : percentage >= 50 ? '✓' : '○';
+        html += `
+            <div class="category-item">
+                <span class="category-emoji">${emoji}</span>
+                <span class="category-name">${category}</span>
+                <span class="category-score">${percentage.toFixed(0)}%</span>
+            </div>
+        `;
+    });
+    html += '</div></div>';
+    
+    html += '</div>';
+    summaryDiv.innerHTML = html;
+}
+
+function showPrompt() {
+    showScreen('result');
+}
+
 // --- Ergebnis ---
 
 function finishQuiz() {
-    const hobbies = document.getElementById('hobbiesInput').value;
-    const wishes = document.getElementById('wishesInput').value;
+    // Wir nutzen .trim(), um leere Eingaben (nur Leerzeichen) zu erkennen
+    const hobbies = document.getElementById('hobbiesInput').value.trim();
+    const wishes = document.getElementById('wishesInput').value.trim();
 
     let prompt = `Du bist ein freundlicher, motivierender Berufsberater für Schülerinnen und Schüler in Bremen.
 Deine Aufgabe: Analysiere das Profil und schlage passende Berufe vor.
@@ -172,12 +429,14 @@ WICHTIG ZUR ANALYSE:
 - "Soziales" niedrig = Berufe mit Daten, Maschinen, IT und so weiter.
 - "Lernen" hoch = Eher Studium oder anspruchsvolle Theorie-Ausbildung.
 - "Lernen" praxisorientiert = Eher handwerkliche/duale Ausbildung.
+- Achte auf spezielle Interessen wie Handwerk, Medien oder Pflege.
 
 STRUKTUR DEINER ANTWORT:
-1. Schlage 5 konkrete Berufe oder Berufsfelder vor. 
-   WICHTIG: Mische dabei gängige Berufe mit mindestens einem eher ungewöhnlichen oder weniger bekannten Beruf, der aber gut passen könnte.
-2. Erkläre bei jedem Beruf kurz, warum er zu den Antworten passt.
-3. Beende deine Antwort IMMER mit einer offenen Frage, um ein Gespräch zu starten.
+1. Begrüße kurz auf Norddeutsch (z.B. Moin).
+2. Schlage 5 konkrete Berufe oder Berufsfelder vor. 
+   WICHTIG: Mische dabei gängige Berufe mit mindestens einem eher ungewöhnlichen oder weniger bekannten Beruf, der aber gut passen könnte. Berücksichtige dabei auch Branchen, die in Bremen stark sind (z.B. Logistik, Luft- und Raumfahrt, maritime Wirtschaft, Lebensmitteltechnologie oder Deep-Tech).
+3. Erkläre bei jedem Beruf kurz, warum er zu den Antworten passt.
+4. Beende deine Antwort IMMER mit einer offenen Frage, um ein Gespräch zu starten.
 
 PROFIL:
 Schulabschluss: ${graduation}
@@ -190,14 +449,26 @@ ANTWORTEN (Skala 1-4):
         const val = answers[q.id];
         if(val !== undefined) {
              const valText = val === 1 ? 'Nein' : val === 2 ? 'Eher nicht' : val === 3 ? 'Eher ja' : 'Ja, voll';
+             // Kategorie im Prompt mitgeben hilft der KI bei der Einordnung
              prompt += `- ${q.category}: ${q.text} -> ${valText} (${val}/4)\n`;
         }
     });
 
-    prompt += `\nHobbys: ${hobbies}\nWünsche: ${wishes}\n`;
+    // Logik: Füge die Labels nur hinzu, wenn Text eingegeben wurde
+    if (hobbies.length > 0) {
+        prompt += `\nHobbys: ${hobbies}\n`;
+    }
+    
+    if (wishes.length > 0) {
+        prompt += `Wünsche: ${wishes}\n`;
+    }
 
     document.getElementById('finalPrompt').value = prompt;
-    showScreen('result');
+    
+    // Zeige zuerst die Profil-Zusammenfassung
+    drawRadarChart();
+    generateProfileSummary();
+    showScreen('summary');
 }
 
 function copyToClipboard() {
@@ -208,9 +479,125 @@ function copyToClipboard() {
         const originalContent = btn.innerHTML;
         btn.innerHTML = '<i class="ph-bold ph-check"></i> Kopiert!';
         btn.style.background = '#10B981'; // Grün für Erfolg
+        showToast('Prompt kopiert! 📋');
         setTimeout(() => {
             btn.innerHTML = originalContent;
             btn.style.background = '#1F2937';
         }, 2000);
     });
 }
+
+// --- Download-Funktion ---
+function downloadPrompt() {
+    const prompt = document.getElementById('finalPrompt').value;
+    const blob = new Blob([prompt], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `berufsberatung-profil-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Prompt heruntergeladen! 💾');
+}
+
+// --- Speichern/Laden mit localStorage ---
+function saveResult() {
+    const prompt = document.getElementById('finalPrompt').value;
+    const timestamp = new Date().toISOString();
+    const resultData = {
+        prompt,
+        timestamp,
+        graduation,
+        answers: { ...answers },
+        hobbies: document.getElementById('hobbiesInput').value.trim(),
+        wishes: document.getElementById('wishesInput').value.trim()
+    };
+    
+    let savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
+    savedResults.push(resultData);
+    
+    // Maximal 10 Ergebnisse speichern
+    if (savedResults.length > 10) {
+        savedResults = savedResults.slice(-10);
+    }
+    
+    localStorage.setItem('berufsberatung_results', JSON.stringify(savedResults));
+    showToast('Ergebnis gespeichert! 💾');
+    loadSavedResults();
+}
+
+function loadSavedResults() {
+    const savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
+    const section = document.getElementById('savedResultsSection');
+    const list = document.getElementById('savedResultsList');
+    
+    if (!section || !list) return;
+    
+    if (savedResults.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+    
+    section.style.display = 'block';
+    list.innerHTML = '';
+    
+    savedResults.reverse().forEach((result, index) => {
+        const date = new Date(result.timestamp);
+        const dateStr = date.toLocaleDateString('de-DE', { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        const item = document.createElement('div');
+        item.className = 'saved-result-item';
+        item.innerHTML = `
+            <div class="saved-result-info">
+                <strong>Profil #${savedResults.length - index}</strong>
+                <span>${dateStr}</span>
+            </div>
+            <div class="saved-result-actions">
+                <button class="btn-load" onclick="loadResult(${savedResults.length - 1 - index})">
+                    <i class="ph-bold ph-arrow-clockwise"></i> Laden
+                </button>
+                <button class="btn-delete" onclick="deleteResult(${savedResults.length - 1 - index})">
+                    <i class="ph-bold ph-trash"></i>
+                </button>
+            </div>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function loadResult(index) {
+    const savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
+    if (index < 0 || index >= savedResults.length) return;
+    
+    const result = savedResults[savedResults.length - 1 - index];
+    document.getElementById('finalPrompt').value = result.prompt;
+    showToast('Ergebnis geladen! 📂');
+}
+
+function deleteResult(index) {
+    let savedResults = JSON.parse(localStorage.getItem('berufsberatung_results') || '[]');
+    const actualIndex = savedResults.length - 1 - index;
+    savedResults.splice(actualIndex, 1);
+    localStorage.setItem('berufsberatung_results', JSON.stringify(savedResults));
+    loadSavedResults();
+    showToast('Ergebnis gelöscht! 🗑️');
+}
+
+// Lade gespeicherte Ergebnisse beim Öffnen des Result-Screens
+const originalShowScreen = showScreen;
+function showScreenWithLoad(screenKey) {
+    originalShowScreen(screenKey);
+    if (screenKey === 'result') {
+        setTimeout(loadSavedResults, 100);
+    }
+}
+// Überschreibe showScreen
+showScreen = showScreenWithLoad;
