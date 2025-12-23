@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="KI-Berufsberatung für Schüler in Bremen: Finde passende Praktika und Ausbildungen mit einem Quiz und KI-Prompts.">
     <title>KI-Berufs-Beratung Bremen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,15 +20,15 @@
             </div>
         </div>
         <div class="progress-wrapper">
-            <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Fortschritt des Quizzes">
-                <div class="progress-category-info" id="progressCategoryInfo" aria-live="polite"></div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-category-info" id="progressCategoryInfo"></div>
             </div>
         </div>
     </header>
 
     <main id="app">
-
-        <section id="intro-screen" class="screen active" aria-hidden="false">
+        
+        <section id="intro-screen" class="screen active">
             <div class="card intro-card">
                 <h2>Moin! 👋</h2>
                 <p>Finde heraus, was wirklich zu dir passt.</p>
@@ -38,7 +37,9 @@
                 <div class="input-group">
                     <label for="graduation">Dein angestrebter Abschluss:</label>
                     <div class="select-wrapper">
-                        <select id="graduation" aria-required="true" aria-describedby="graduation-help">
+                        <select id="graduation">
+                            <option value="" disabled selected>Bitte auswählen...</option>
+                            <option value="egal">Egal / Weiß noch nicht</option>
                             <option value="BBR">Berufsbildungsreife (BBR)</option>
                             <option value="Erweiterte BBR">Erweiterte BBR</option>
                             <option value="MSA">Mittlerer Schulabschluss (MSA)</option>
@@ -49,64 +50,73 @@
                     </div>
                 </div>
 
-                    <small id="graduation-help" class="sr-only">Wähle deinen Schulabschluss aus, um zu starten.</small>
-                <button class="btn-primary" onclick="startQuiz()" role="button" aria-label="Quiz starten">Quiz starten</button>
+                <button class="btn-primary" onclick="startQuiz()">
+                    Starten <i class="ph-bold ph-arrow-right"></i>
+                </button>
             </div>
         </section>
 
-        <section id="quiz-screen" class="screen hidden" aria-hidden="true">
-            <div class="card">
-                <span class="category-badge" id="categoryBadge">Kategorie</span>
+        <section id="quiz-screen" class="screen hidden">
+            <div class="card quiz-card">
+                <div class="badge-container">
+                    <span class="category-badge" id="categoryBadge">Kategorie</span>
+                </div>
                 <h3 id="questionText">Frage...</h3>
                 
                 <div class="options-grid">
-                    <button class="option-btn" onclick="answer(1)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" role="radio" aria-checked="false" aria-label="Antwort: Nein">
-                        <span class="emoji">⛔</span> Nein
+                    <button class="option-btn" onclick="answer(1)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
+                        <span class="emoji">⛔</span>
+                        <span class="label">Nein</span>
                     </button>
-                    <button class="option-btn" onclick="answer(2)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" role="radio" aria-checked="false" aria-label="Antwort: Eher nicht">
-                        <span class="emoji">☁️</span> Eher nicht
+                    <button class="option-btn" onclick="answer(2)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
+                        <span class="emoji">☁️</span>
+                        <span class="label">Eher nicht</span>
                     </button>
-                    <button class="option-btn" onclick="answer(3)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" role="radio" aria-checked="false" aria-label="Antwort: Eher ja">
-                        <span class="emoji">🌤️</span> Eher ja
+                    <button class="option-btn" onclick="answer(3)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
+                        <span class="emoji">🌤️</span>
+                        <span class="label">Eher ja</span>
                     </button>
-                    <button class="option-btn" onclick="answer(4)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" role="radio" aria-checked="false" aria-label="Antwort: Ja, voll">
-                        <span class="emoji">✅</span> Ja, voll
+                    <button class="option-btn" onclick="answer(4)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
+                        <span class="emoji">☀️</span>
+                        <span class="label">Ja, voll</span>
                     </button>
                 </div>
 
-                <button class="btn-secondary" onclick="prevStep()">
+                <button class="btn-ghost" onclick="prevStep()">
                     <i class="ph ph-arrow-left"></i> Zurück
                 </button>
             </div>
         </section>
 
-        <section id="text-screen" class="screen hidden" aria-hidden="true">
+        <section id="text-screen" class="screen hidden">
             <div class="card">
+                <h2>Fast fertig! 🚀</h2>
                 <p>Gib der KI noch ein paar Details für bessere Ergebnisse.</p>
-
+                
                 <div class="input-group">
-                    <label for="hobbiesInput">Deine Hobbys & Interessen</label>
-                    <textarea id="hobbiesInput" placeholder="z.B. Zocken, Fußball, Zeichnen, Kochen, Autos..." aria-label="Eingabe deiner Hobbys und Interessen" aria-describedby="hobbies-help"></textarea>
-                    <small id="hobbies-help" class="sr-only">Beschreibe deine Hobbys für personalisierte Vorschläge.</small>
+                    <label>Deine Hobbys & Interessen</label>
+                    <textarea id="hobbiesInput" placeholder="z.B. Zocken, Fußball, Zeichnen, Kochen, Autos..."></textarea>
                 </div>
+                
                 <div class="input-group">
-                    <label for="wishesInput">Hast du schon Wünsche?</label>
+                    <label>Hast du schon Wünsche?</label>
                     <textarea id="wishesInput" placeholder="z.B. Nicht im Büro sitzen, Arbeit mit Tieren, viel Geld verdienen..."></textarea>
                 </div>
+
                 <button class="btn-primary" onclick="finishQuiz()">
                     Ergebnis erstellen <i class="ph-bold ph-magic-wand"></i>
                 </button>
             </div>
         </section>
 
-        <section id="result-screen" class="screen hidden" aria-hidden="true">
+        <section id="result-screen" class="screen hidden">
             <div class="card result-card">
+                <div class="hero-icon">🎉</div>
                 <h2>Dein Profil ist fertig!</h2>
                 <p>Kopiere den Text unten und füge ihn in eine KI ein.</p>
-
+                
                 <div class="prompt-box">
-                    <textarea id="finalPrompt" readonly onclick="this.select()" aria-label="Generierter KI-Prompt – klicke zum Auswählen" aria-describedby="prompt-help"></textarea>
-                    <small id="prompt-help" class="sr-only">Kopiere diesen Text in eine KI wie ChatGPT für Berufsvorschläge.</small>
+                    <textarea id="finalPrompt" readonly onclick="this.select()"></textarea>
                     <div class="prompt-actions">
                         <button id="copyBtn" class="btn-copy" onclick="copyToClipboard()">
                             <i class="ph-bold ph-copy"></i> Kopieren
@@ -118,6 +128,7 @@
                             <i class="ph-bold ph-floppy-disk"></i> Speichern
                         </button>
                     </div>
+                </div>
                 
                 <div class="saved-results-section" id="savedResultsSection" style="display: none;">
                     <h3><i class="ph-fill ph-bookmark"></i> Gespeicherte Ergebnisse</h3>
@@ -150,7 +161,8 @@
             </div>
         </section>
 
-        <section id="info-screen" class="screen hidden" aria-hidden="true">
+        <section id="info-screen" class="screen hidden">
+            <div class="card info-card">
                 <h2>Bremen Infos <span style="color:var(--bremen-red);">♥</span></h2>
                 <p>Hier findest du Praktikumsplätze und Hilfe.</p>
 
@@ -163,7 +175,7 @@
                         <span>job4u Bremen</span> <i class="ph-bold ph-arrow-up-right"></i>
                     </a>
                     <a href="https://jobs.weser-kurier.de/?tjid=E5ZW1fyOleD7YXET6x3t6&sfTab=1" target="_blank" class="link-row">
-                        <span>Weser-Kurier Jobs</span> <i class="ph-bold ph-arrow-up-right"></i>
+                        <span>Weser-Kurier Stellenmarkt</span> <i class="ph-bold ph-arrow-up-right"></i>
                     </a>
                     <a href="https://www.praktikumsstellen.de/suche.html?l=Bremen&r=30&s=P&d=-1" target="_blank" class="link-row">
                         <span>Praktikumsstellen.de (Bremen)</span> <i class="ph-bold ph-arrow-up-right"></i>
@@ -203,7 +215,8 @@
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-btn" onclick="openInfo()" role="button" aria-label="Öffne Info zu Praktikumsplätzen und Beratung in Bremen">
+        <button class="nav-btn" onclick="openInfo()">
+            <div class="nav-icon"><i class="ph-fill ph-magnifying-glass"></i></div>
             <div class="nav-text">
                 <strong>Praktikum & Hilfe</strong>
                 <span>Links anzeigen</span>
@@ -215,7 +228,4 @@
 
     <script src="script.js"></script>
 </body>
-    <style>
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-    </style>
 </html>

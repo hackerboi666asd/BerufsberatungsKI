@@ -78,12 +78,10 @@ function showScreen(screenKey) {
     Object.values(screens).forEach(s => {
         s.classList.remove('active');
         s.classList.add('hidden');
-        s.setAttribute('aria-hidden', 'true'); // ARIA: Verstecke für Screen-Reader
     });
 
     // Neuen Screen anzeigen
     target.classList.remove('hidden');
-    target.setAttribute('aria-hidden', 'false'); // ARIA: Zeige für Screen-Reader
     // Kurzer Timeout für CSS Animation
     setTimeout(() => target.classList.add('active'), 10);
     window.scrollTo(0, 0);
@@ -111,9 +109,6 @@ function updateProgressBar() {
     const progressBar = document.getElementById('progressBar');
     progressBar.style.width = `${percentage}%`;
     
-    // ARIA-Update für Progress-Bar
-    progressBar.setAttribute('aria-valuenow', Math.round(percentage));
-
     // Entferne border-radius wenn 100% erreicht
     if (percentage >= 100) {
         progressBar.style.borderRadius = '0';
@@ -216,7 +211,6 @@ function renderQuestion() {
     btns.forEach(btn => {
         btn.style.borderColor = 'transparent';
         btn.style.background = '#F9FAFB';
-        btn.setAttribute('aria-checked', 'false'); // ARIA: Zurücksetzen
     });
     
     // Motivations-Feedback nur bei Kategorie-Wechsel
@@ -238,12 +232,12 @@ function answer(value) {
     if(btns[btnIndex]) {
         btns[btnIndex].style.borderColor = '#CE1126'; // Bremer Rot
         btns[btnIndex].style.background = '#FFEBEE'; // Hellrot
-        btns[btnIndex].setAttribute('aria-checked', 'true'); // ARIA: Markiere als gewählt
     }
 
     // Weiter zur nächsten Frage
     setTimeout(() => {
         if (currentStep < questions.length - 1) {
+            currentStep++;
             renderQuestion();
             updateProgressBar();
         } else {
@@ -281,11 +275,14 @@ function calculateCategoryScores() {
         }
     });
     
+    // Berechne Durchschnitt pro Kategorie (0-4 Skala)
     const categoryAverages = {};
     for (const [category, total] of Object.entries(categoryScores)) {
         const count = categoryCounts[category];
         categoryAverages[category] = count > 0 ? total / count : 0;
     }
+    
+    return categoryAverages;
 }
 
 function drawRadarChart() {
@@ -385,6 +382,7 @@ function generateProfileSummary() {
                 <div class="strength-label">${category}</div>
                 <div class="strength-bar">
                     <div class="strength-fill" style="width: ${percentage}%"></div>
+                </div>
                 <div class="strength-value">${percentage.toFixed(0)}%</div>
             </div>
         `;
