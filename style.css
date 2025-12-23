@@ -125,6 +125,7 @@ main {
     animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .screen.active { display: block; }
+.screen.hidden { display: none !important; }
 
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -143,7 +144,14 @@ main {
     overflow-y: auto;
 }
 
-.hero-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+.intro-card { /* Spezielle Styling für Intro-Karte */
+    text-align: center;
+}
+
+.result-card { /* Spezielle Styling für Ergebnis-Karte */
+    text-align: left;
+}
+
 
 h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); letter-spacing: -0.5px; }
 h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
@@ -207,6 +215,27 @@ textarea { height: 120px; resize: vertical; }
 }
 .btn-ghost:hover { color: var(--text-main); }
 
+.btn-secondary {
+    background: #F3F4F6;
+    color: var(--text-main);
+    border: 2px solid #E5E7EB;
+    padding: 12px 20px;
+    border-radius: var(--radius-m);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+.btn-secondary:hover {
+    background: #E5E7EB;
+    border-color: #D1D5DB;
+}
+.btn-secondary:active { transform: scale(0.98); }
+
 /* --- Quiz Options Grid --- */
 .options-grid {
     display: grid;
@@ -231,7 +260,6 @@ textarea { height: 120px; resize: vertical; }
 .option-btn:hover { background: white; border-color: #E5E7EB; box-shadow: var(--shadow-soft); }
 
 .emoji { font-size: 2rem; }
-.label { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
 
 .category-badge {
     background: var(--bremen-red-light);
@@ -439,16 +467,6 @@ textarea { height: 120px; resize: vertical; }
     transition: transform 0.2s;
 }
 .nav-btn:active { transform: translateX(-50%) scale(0.96); }
-
-.nav-icon {
-    width: 44px; height: 44px;
-    background: var(--bremen-red-light);
-    color: var(--bremen-red);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    margin-right: 15px;
-}
 .nav-text strong { display: block; font-size: 1rem; color: var(--text-main); }
 .nav-text span { font-size: 0.8rem; color: var(--text-muted); }
 
