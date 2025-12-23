@@ -170,13 +170,13 @@ function openInfo() {
     }
     showScreen('info');
     // Bottom-Nav ausblenden im Info-Screen
-    document.querySelector('.bottom-nav').style.display = 'none';
+    document.querySelector('.bottom-nav').classList.add('hidden');
 }
 
 function closeInfo() {
     showScreen(lastActiveScreen);
     // Bottom-Nav wieder einblenden
-    document.querySelector('.bottom-nav').style.display = 'flex';
+    document.querySelector('.bottom-nav').classList.remove('hidden');
 }
 
 function updateProgressBar() {

@@ -603,6 +603,10 @@ textarea { height: 120px; resize: vertical; }
     gap: 10px;
 }
 
+.bottom-nav.hidden {
+    display: none;
+}
+
 .nav-btn {
     flex: 1;
     background: white;
