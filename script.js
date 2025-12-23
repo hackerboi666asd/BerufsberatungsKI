@@ -52,6 +52,79 @@ const questions = [
     { id: 'env_unterwegs', category: 'Typfrage', text: 'Ich fände es toll, beruflich viel unterwegs zu sein (Fahrzeuge, Reisen).' } // NEU
 ];
 
+// --- Dark Mode Management ---
+function initDarkMode() {
+    const savedMode = localStorage.getItem('darkMode');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    
+    if (!darkModeToggle || !darkModeIcon) return;
+    
+    // Funktion zum Setzen des Themes
+    function setTheme(mode) {
+        const root = document.documentElement;
+        root.classList.remove('dark-mode', 'light-mode');
+        
+        if (mode === 'dark') {
+            root.classList.add('dark-mode');
+            darkModeIcon.className = 'ph-bold ph-sun';
+            darkModeToggle.setAttribute('aria-label', 'Light Mode aktivieren');
+        } else if (mode === 'light') {
+            root.classList.add('light-mode');
+            darkModeIcon.className = 'ph-bold ph-moon';
+            darkModeToggle.setAttribute('aria-label', 'Dark Mode aktivieren');
+        } else {
+            // Auto mode - folge System-Präferenz
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                root.classList.add('dark-mode');
+                darkModeIcon.className = 'ph-bold ph-sun';
+            } else {
+                root.classList.add('light-mode');
+                darkModeIcon.className = 'ph-bold ph-moon';
+            }
+            darkModeToggle.setAttribute('aria-label', 'Dark Mode umschalten');
+        }
+        
+        localStorage.setItem('darkMode', mode);
+    }
+    
+    // Initialisierung
+    if (savedMode) {
+        setTheme(savedMode);
+    } else {
+        // Keine gespeicherte Präferenz - folge System
+        setTheme('auto');
+    }
+    
+    // Toggle-Button Event
+    darkModeToggle.addEventListener('click', () => {
+        const currentMode = localStorage.getItem('darkMode') || 'auto';
+        let nextMode;
+        
+        if (currentMode === 'auto') {
+            nextMode = 'dark';
+        } else if (currentMode === 'dark') {
+            nextMode = 'light';
+        } else {
+            nextMode = 'auto';
+        }
+        
+        setTheme(nextMode);
+    });
+    
+    // System-Präferenz-Änderungen überwachen (nur wenn auto aktiv)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const currentMode = localStorage.getItem('darkMode') || 'auto';
+        if (currentMode === 'auto') {
+            setTheme('auto');
+        }
+    });
+}
+
+// Initialisiere Dark Mode beim Laden
+document.addEventListener('DOMContentLoaded', initDarkMode);
+
 // State
 let currentStep = 0;
 let answers = {};
@@ -107,7 +180,15 @@ function updateProgressBar() {
     const currentProgress = currentStep + 1; 
     const percentage = (currentProgress / totalSteps) * 100;
     const progressBar = document.getElementById('progressBar');
+    const progressWrapper = document.querySelector('.progress-wrapper');
+    
     progressBar.style.width = `${percentage}%`;
+    
+    // ARIA-Attribute für Progress Bar
+    if (progressWrapper) {
+        progressWrapper.setAttribute('aria-valuenow', Math.round(percentage));
+        progressWrapper.setAttribute('aria-valuetext', `${Math.round(percentage)}% abgeschlossen`);
+    }
     
     // Entferne border-radius wenn 100% erreicht
     if (percentage >= 100) {
@@ -127,6 +208,7 @@ function updateProgressBar() {
             
             categoryInfo.textContent = `${q.category} ${categoryProgress}/${categoryTotal}`;
             categoryInfo.style.display = 'block';
+            categoryInfo.setAttribute('aria-label', `Aktuelle Kategorie: ${q.category}, Frage ${categoryProgress} von ${categoryTotal}`);
         }
     } else {
         const categoryInfo = document.getElementById('progressCategoryInfo');
@@ -150,9 +232,19 @@ function showToast(message, type = 'success') {
     const emoji = emojis[type] ? emojis[type][Math.floor(Math.random() * emojis[type].length)] : '✨';
     toast.textContent = `${emoji} ${message}`;
     toast.className = `toast toast-${type} toast-show`;
+    toast.setAttribute('aria-live', 'assertive');
+    toast.setAttribute('aria-atomic', 'true');
+    
+    // Für Screenreader: Text auch als aria-label setzen
+    toast.setAttribute('aria-label', message);
     
     setTimeout(() => {
         toast.classList.remove('toast-show');
+        // Nach Animation zurücksetzen
+        setTimeout(() => {
+            toast.textContent = '';
+            toast.removeAttribute('aria-label');
+        }, 300);
     }, 2000);
 }
 
@@ -203,15 +295,29 @@ function startQuiz() {
 
 function renderQuestion() {
     const q = questions[currentStep];
-    document.getElementById('categoryBadge').innerText = q.category;
-    document.getElementById('questionText').innerText = q.text;
+    const categoryBadge = document.getElementById('categoryBadge');
+    const questionText = document.getElementById('questionText');
+    
+    categoryBadge.innerText = q.category;
+    categoryBadge.setAttribute('aria-label', `Aktuelle Kategorie: ${q.category}`);
+    
+    questionText.innerText = q.text;
+    questionText.setAttribute('aria-label', `Frage ${currentStep + 1} von ${questions.length}: ${q.text}`);
     
     // Buttons zurücksetzen
     const btns = document.querySelectorAll('.option-btn');
-    btns.forEach(btn => {
+    btns.forEach((btn, index) => {
         btn.style.borderColor = 'transparent';
-        btn.style.background = '#F9FAFB';
+        btn.style.background = '';
+        btn.setAttribute('aria-checked', 'false');
+        btn.setAttribute('aria-current', 'false');
     });
+    
+    // Setze aria-current für aktuelle Frage
+    const quizScreen = document.getElementById('quiz-screen');
+    if (quizScreen) {
+        quizScreen.setAttribute('aria-current', 'step');
+    }
     
     // Motivations-Feedback nur bei Kategorie-Wechsel
     if (lastCategory !== null && lastCategory !== q.category) {
@@ -229,9 +335,23 @@ function answer(value) {
     // Visuelles Feedback
     const btnIndex = value - 1; 
     const btns = document.querySelectorAll('.option-btn');
+    
+    // Alle Buttons zurücksetzen
+    btns.forEach(btn => {
+        btn.setAttribute('aria-checked', 'false');
+        btn.style.borderColor = 'transparent';
+        btn.style.background = '';
+    });
+    
+    // Ausgewählten Button markieren
     if(btns[btnIndex]) {
         btns[btnIndex].style.borderColor = '#CE1126'; // Bremer Rot
         btns[btnIndex].style.background = '#FFEBEE'; // Hellrot
+        btns[btnIndex].setAttribute('aria-checked', 'true');
+        
+        // ARIA-Label für Screenreader
+        const labels = ['Nein', 'Eher nicht', 'Eher ja', 'Ja, voll'];
+        btns[btnIndex].setAttribute('aria-label', `Antwort: ${labels[btnIndex]} - Ausgewählt`);
     }
 
     // Weiter zur nächsten Frage
@@ -469,13 +589,18 @@ function copyToClipboard() {
     navigator.clipboard.writeText(text.value).then(() => {
         const btn = document.getElementById('copyBtn');
         const originalContent = btn.innerHTML;
-        btn.innerHTML = '<i class="ph-bold ph-check"></i> Kopiert!';
+        const originalAriaLabel = btn.getAttribute('aria-label');
+        btn.innerHTML = '<i class="ph-bold ph-check" aria-hidden="true"></i> Kopiert!';
+        btn.setAttribute('aria-label', 'Prompt erfolgreich kopiert');
         btn.style.background = '#10B981'; // Grün für Erfolg
         showToast('Prompt kopiert!');
         setTimeout(() => {
             btn.innerHTML = originalContent;
+            btn.setAttribute('aria-label', originalAriaLabel || 'Prompt in Zwischenablage kopieren');
             btn.style.background = '#1F2937';
         }, 2000);
+    }).catch(() => {
+        showToast('Fehler beim Kopieren', 'info');
     });
 }
 
@@ -545,19 +670,22 @@ function loadSavedResults() {
             minute: '2-digit'
         });
         
+        const actualIndex = savedResults.length - 1 - index;
         const item = document.createElement('div');
         item.className = 'saved-result-item';
+        item.setAttribute('role', 'listitem');
+        item.setAttribute('aria-label', `Gespeichertes Profil ${actualIndex + 1} vom ${dateStr}`);
         item.innerHTML = `
             <div class="saved-result-info">
                 <strong>Profil #${savedResults.length - index}</strong>
                 <span>${dateStr}</span>
             </div>
             <div class="saved-result-actions">
-                <button class="btn-load" onclick="loadResult(${savedResults.length - 1 - index})">
-                    <i class="ph-bold ph-arrow-clockwise"></i> Laden
+                <button class="btn-load" onclick="loadResult(${actualIndex})" aria-label="Profil ${actualIndex + 1} laden">
+                    <i class="ph-bold ph-arrow-clockwise" aria-hidden="true"></i> Laden
                 </button>
-                <button class="btn-delete" onclick="deleteResult(${savedResults.length - 1 - index})">
-                    <i class="ph-bold ph-trash"></i>
+                <button class="btn-delete" onclick="deleteResult(${actualIndex})" aria-label="Profil ${actualIndex + 1} löschen">
+                    <i class="ph-bold ph-trash" aria-hidden="true"></i>
                 </button>
             </div>
         `;

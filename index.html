@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#CE1126">
     <title>KI-Berufs-Beratung Bremen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
 </head>
 <body>
 
     <header>
         <div class="header-inner">
-            <div class="logo">
-                <i class="ph-fill ph-key" style="transform: rotate(45deg);"></i>
+            <div class="logo" aria-label="KI-Berufs-Beratung Bremen Logo">
+                <i class="ph-fill ph-key" style="transform: rotate(45deg);" aria-hidden="true"></i>
                 <h1>KI-Berufs-Beratung <span class="bremen-text">Bremen</span></h1>
             </div>
+            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Dark Mode umschalten">
+                <i class="ph-bold ph-moon" id="darkModeIcon"></i>
+            </button>
         </div>
-        <div class="progress-wrapper">
+        <div class="progress-wrapper" role="progressbar" aria-label="Quiz-Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-bar" id="progressBar">
-                <div class="progress-category-info" id="progressCategoryInfo"></div>
+                <div class="progress-category-info" id="progressCategoryInfo" aria-live="polite"></div>
             </div>
         </div>
     </header>
@@ -50,40 +67,40 @@
                     </div>
                 </div>
 
-                <button class="btn-primary" onclick="startQuiz()">
-                    Starten <i class="ph-bold ph-arrow-right"></i>
+                <button class="btn-primary" onclick="startQuiz()" aria-label="Quiz starten">
+                    Starten <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
                 </button>
             </div>
         </section>
 
-        <section id="quiz-screen" class="screen hidden">
+        <section id="quiz-screen" class="screen hidden" aria-live="polite">
             <div class="card quiz-card">
                 <div class="badge-container">
-                    <span class="category-badge" id="categoryBadge">Kategorie</span>
+                    <span class="category-badge" id="categoryBadge" aria-label="Aktuelle Kategorie">Kategorie</span>
                 </div>
-                <h3 id="questionText">Frage...</h3>
+                <h3 id="questionText" aria-label="Aktuelle Frage">Frage...</h3>
                 
-                <div class="options-grid">
-                    <button class="option-btn" onclick="answer(1)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
-                        <span class="emoji">⛔</span>
+                <div class="options-grid" role="radiogroup" aria-labelledby="questionText">
+                    <button class="option-btn" onclick="answer(1)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" aria-label="Antwort: Nein" role="radio" aria-checked="false">
+                        <span class="emoji" aria-hidden="true">⛔</span>
                         <span class="label">Nein</span>
                     </button>
-                    <button class="option-btn" onclick="answer(2)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
-                        <span class="emoji">☁️</span>
+                    <button class="option-btn" onclick="answer(2)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" aria-label="Antwort: Eher nicht" role="radio" aria-checked="false">
+                        <span class="emoji" aria-hidden="true">☁️</span>
                         <span class="label">Eher nicht</span>
                     </button>
-                    <button class="option-btn" onclick="answer(3)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
-                        <span class="emoji">🌤️</span>
+                    <button class="option-btn" onclick="answer(3)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" aria-label="Antwort: Eher ja" role="radio" aria-checked="false">
+                        <span class="emoji" aria-hidden="true">🌤️</span>
                         <span class="label">Eher ja</span>
                     </button>
-                    <button class="option-btn" onclick="answer(4)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)">
-                        <span class="emoji">☀️</span>
+                    <button class="option-btn" onclick="answer(4)" onmousedown="addSwipeFeedback(this)" ontouchstart="addSwipeFeedback(this)" onmouseup="removeSwipeFeedback(this)" ontouchend="removeSwipeFeedback(this)" aria-label="Antwort: Ja, voll" role="radio" aria-checked="false">
+                        <span class="emoji" aria-hidden="true">☀️</span>
                         <span class="label">Ja, voll</span>
                     </button>
                 </div>
 
-                <button class="btn-ghost" onclick="prevStep()">
-                    <i class="ph ph-arrow-left"></i> Zurück
+                <button class="btn-ghost" onclick="prevStep()" aria-label="Zurück zur vorherigen Frage">
+                    <i class="ph ph-arrow-left" aria-hidden="true"></i> Zurück
                 </button>
             </div>
         </section>
@@ -94,17 +111,19 @@
                 <p>Gib der KI noch ein paar Details für bessere Ergebnisse.</p>
                 
                 <div class="input-group">
-                    <label>Deine Hobbys & Interessen</label>
-                    <textarea id="hobbiesInput" placeholder="z.B. Zocken, Fußball, Zeichnen, Kochen, Autos..."></textarea>
+                    <label for="hobbiesInput">Deine Hobbys & Interessen</label>
+                    <textarea id="hobbiesInput" placeholder="z.B. Zocken, Fußball, Zeichnen, Kochen, Autos..." aria-describedby="hobbiesInput-desc"></textarea>
+                    <span id="hobbiesInput-desc" class="sr-only">Gib hier deine Hobbys und Interessen ein, um bessere Berufsvorschläge zu erhalten</span>
                 </div>
                 
                 <div class="input-group">
-                    <label>Hast du schon Wünsche?</label>
-                    <textarea id="wishesInput" placeholder="z.B. Nicht im Büro sitzen, Arbeit mit Tieren, viel Geld verdienen..."></textarea>
+                    <label for="wishesInput">Hast du schon Wünsche?</label>
+                    <textarea id="wishesInput" placeholder="z.B. Nicht im Büro sitzen, Arbeit mit Tieren, viel Geld verdienen..." aria-describedby="wishesInput-desc"></textarea>
+                    <span id="wishesInput-desc" class="sr-only">Gib hier deine Wünsche für deinen zukünftigen Beruf ein</span>
                 </div>
 
-                <button class="btn-primary" onclick="finishQuiz()">
-                    Ergebnis erstellen <i class="ph-bold ph-magic-wand"></i>
+                <button class="btn-primary" onclick="finishQuiz()" aria-label="Ergebnis erstellen">
+                    Ergebnis erstellen <i class="ph-bold ph-magic-wand" aria-hidden="true"></i>
                 </button>
             </div>
         </section>
@@ -116,48 +135,49 @@
                 <p>Kopiere den Text unten und füge ihn in eine KI ein.</p>
                 
                 <div class="prompt-box">
-                    <textarea id="finalPrompt" readonly onclick="this.select()"></textarea>
+                    <label for="finalPrompt" class="sr-only">Generierter Prompt für KI-Beratung</label>
+                    <textarea id="finalPrompt" readonly onclick="this.select()" aria-label="Generierter Prompt für KI-Beratung. Klicken zum Auswählen"></textarea>
                     <div class="prompt-actions">
-                        <button id="copyBtn" class="btn-copy" onclick="copyToClipboard()">
-                            <i class="ph-bold ph-copy"></i> Kopieren
+                        <button id="copyBtn" class="btn-copy" onclick="copyToClipboard()" aria-label="Prompt in Zwischenablage kopieren">
+                            <i class="ph-bold ph-copy" aria-hidden="true"></i> Kopieren
                         </button>
-                        <button id="downloadBtn" class="btn-download" onclick="downloadPrompt()">
-                            <i class="ph-bold ph-download"></i> Download
+                        <button id="downloadBtn" class="btn-download" onclick="downloadPrompt()" aria-label="Prompt als Datei herunterladen">
+                            <i class="ph-bold ph-download" aria-hidden="true"></i> Download
                         </button>
-                        <button id="saveBtn" class="btn-save" onclick="saveResult()">
-                            <i class="ph-bold ph-floppy-disk"></i> Speichern
+                        <button id="saveBtn" class="btn-save" onclick="saveResult()" aria-label="Ergebnis lokal speichern">
+                            <i class="ph-bold ph-floppy-disk" aria-hidden="true"></i> Speichern
                         </button>
                     </div>
                 </div>
                 
-                <div class="saved-results-section" id="savedResultsSection" style="display: none;">
-                    <h3><i class="ph-fill ph-bookmark"></i> Gespeicherte Ergebnisse</h3>
-                    <div id="savedResultsList"></div>
+                <div class="saved-results-section" id="savedResultsSection" style="display: none;" aria-live="polite">
+                    <h3><i class="ph-fill ph-bookmark" aria-hidden="true"></i> Gespeicherte Ergebnisse</h3>
+                    <div id="savedResultsList" role="list" aria-label="Liste der gespeicherten Profile"></div>
                 </div>
 
                 <div class="ai-links-section">
-                    <h3><i class="ph-fill ph-robot"></i> Wähle deine Beratung:</h3>
+                    <h3><i class="ph-fill ph-robot" aria-hidden="true"></i> Wähle deine Beratung:</h3>
                     
-                    <a href="https://chat.telli.schule/login" target="_blank" class="link-card telli">
-                        <div class="icon-box"><i class="ph-bold ph-graduation-cap"></i></div>
+                    <a href="https://chat.telli.schule/login" target="_blank" class="link-card telli" aria-label="Telli.schule öffnen - Für den Unterricht, datenschutzkonform">
+                        <div class="icon-box"><i class="ph-bold ph-graduation-cap" aria-hidden="true"></i></div>
                         <div class="text-box">
                             <strong>Telli.schule</strong>
                             <span>Für den Unterricht (Datenschutzkonform)</span>
                         </div>
-                        <i class="ph-bold ph-caret-right"></i>
+                        <i class="ph-bold ph-caret-right" aria-hidden="true"></i>
                     </a>
 
                     <div class="private-links">
                         <span>Oder privat nutzen:</span>
                         <div class="pill-container">
-                            <a href="https://chatgpt.com/" target="_blank" class="pill">ChatGPT</a>
-                            <a href="https://gemini.google.com/" target="_blank" class="pill">Gemini</a>
-                            <a href="https://x.com/i/grok" target="_blank" class="pill">Grok</a>
+                            <a href="https://chatgpt.com/" target="_blank" class="pill" aria-label="ChatGPT öffnen">ChatGPT</a>
+                            <a href="https://gemini.google.com/" target="_blank" class="pill" aria-label="Gemini öffnen">Gemini</a>
+                            <a href="https://x.com/i/grok" target="_blank" class="pill" aria-label="Grok öffnen">Grok</a>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn-ghost" onclick="location.reload()">Neu starten</button>
+                <button class="btn-ghost" onclick="location.reload()" aria-label="Quiz neu starten">Neu starten</button>
             </div>
         </section>
 
@@ -168,55 +188,55 @@
 
                 <div class="info-group">
                     <h3>🔍 Praktikumsbörsen (Bremen & Umzu)</h3>
-                    <a href="https://schulewirtschaft-bremen.de/members/?filter_um_praxiseinblicke_8d149=Betriebspraktikum%20w%C3%A4hrend%20der%20Schulzeit" target="_blank" class="link-row">
-                        <span>Schulewirtschaft (Praktikumsbetriebe)</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://schulewirtschaft-bremen.de/members/?filter_um_praxiseinblicke_8d149=Betriebspraktikum%20w%C3%A4hrend%20der%20Schulzeit" target="_blank" class="link-row" aria-label="Schulewirtschaft Praktikumsbetriebe öffnen">
+                        <span>Schulewirtschaft (Praktikumsbetriebe)</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://job4u-ev.de/stellenangebote/" target="_blank" class="link-row">
-                        <span>job4u Bremen</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://job4u-ev.de/stellenangebote/" target="_blank" class="link-row" aria-label="job4u Bremen öffnen">
+                        <span>job4u Bremen</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://jobs.weser-kurier.de/?tjid=E5ZW1fyOleD7YXET6x3t6&sfTab=1" target="_blank" class="link-row">
-                        <span>Weser-Kurier Stellenmarkt</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://jobs.weser-kurier.de/?tjid=E5ZW1fyOleD7YXET6x3t6&sfTab=1" target="_blank" class="link-row" aria-label="Weser-Kurier Stellenmarkt öffnen">
+                        <span>Weser-Kurier Stellenmarkt</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.praktikumsstellen.de/suche.html?l=Bremen&r=30&s=P&d=-1" target="_blank" class="link-row">
-                        <span>Praktikumsstellen.de (Bremen)</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://www.praktikumsstellen.de/suche.html?l=Bremen&r=30&s=P&d=-1" target="_blank" class="link-row" aria-label="Praktikumsstellen.de für Bremen öffnen">
+                        <span>Praktikumsstellen.de (Bremen)</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://jobs.bremen.de/" target="_blank" class="link-row">
-                        <span>Stadt Bremen Jobs</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://jobs.bremen.de/" target="_blank" class="link-row" aria-label="Stadt Bremen Jobs öffnen">
+                        <span>Stadt Bremen Jobs</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
                 </div>
 
                 <div class="info-group">
                     <h3>🛠️ Ausbildung & Handwerk</h3>
-                    <a href="https://www.lehrstellen-radar.de/" target="_blank" class="link-row">
-                        <span>Lehrstellen-Radar</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://www.lehrstellen-radar.de/" target="_blank" class="link-row" aria-label="Lehrstellen-Radar öffnen">
+                        <span>Lehrstellen-Radar</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://meine-ausbildung-in-deutschland.de/" target="_blank" class="link-row">
-                        <span>IHK Lehrstellen</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://meine-ausbildung-in-deutschland.de/" target="_blank" class="link-row" aria-label="IHK Lehrstellen öffnen">
+                        <span>IHK Lehrstellen</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
                 </div>
 
                 <div class="info-group">
                     <h3>🤝 Beratung & Hilfe</h3>
-                    <a href="https://www.jugendberufsagentur-bremen.de/" target="_blank" class="link-row">
-                        <span>Jugendberufsagentur</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://www.jugendberufsagentur-bremen.de/" target="_blank" class="link-row" aria-label="Jugendberufsagentur öffnen">
+                        <span>Jugendberufsagentur</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://planet-beruf.de/schuelerinnen" target="_blank" class="link-row">
-                        <span>Planet Beruf</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://planet-beruf.de/schuelerinnen" target="_blank" class="link-row" aria-label="Planet Beruf öffnen">
+                        <span>Planet Beruf</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.azubiyo.de/bewerbung/" target="_blank" class="link-row">
-                        <span>Azubiyo Vorlagen</span> <i class="ph-bold ph-arrow-up-right"></i>
+                    <a href="https://www.azubiyo.de/bewerbung/" target="_blank" class="link-row" aria-label="Azubiyo Vorlagen öffnen">
+                        <span>Azubiyo Vorlagen</span> <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
                     </a>
                 </div>
 
-                <button class="btn-primary" onclick="closeInfo()">Schließen</button>
+                <button class="btn-primary" onclick="closeInfo()" aria-label="Info-Bereich schließen">Schließen</button>
             </div>
         </section>
 
     </main>
 
-    <nav class="bottom-nav">
-        <button class="nav-btn" onclick="openInfo()">
-            <div class="nav-icon"><i class="ph-fill ph-magnifying-glass"></i></div>
+    <nav class="bottom-nav" role="navigation" aria-label="Hauptnavigation">
+        <button class="nav-btn" onclick="openInfo()" aria-label="Praktikum und Hilfe Links anzeigen">
+            <div class="nav-icon"><i class="ph-fill ph-magnifying-glass" aria-hidden="true"></i></div>
             <div class="nav-text">
                 <strong>Praktikum & Hilfe</strong>
                 <span>Links anzeigen</span>
@@ -224,7 +244,7 @@
         </button>
     </nav>
     
-    <div id="toast" class="toast"></div>
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
 
     <script src="script.js"></script>
 </body>
