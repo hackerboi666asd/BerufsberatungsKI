@@ -71,7 +71,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 100px; /* Platz für Bottom Nav */
+    padding-bottom: 80px; /* Platz für Bottom Nav */
     transition: var(--transition-theme);
 }
 
@@ -102,7 +102,7 @@ header {
 .header-inner {
     padding: 15px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: relative;
 }
@@ -412,7 +412,7 @@ textarea { height: 120px; resize: vertical; }
 }
 @media (max-width: 480px) {
     .prompt-actions {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 4px;
     }
 }
@@ -424,7 +424,7 @@ textarea { height: 120px; resize: vertical; }
     font-size: 0.85rem;
 }
 .btn-copy {
-    background: #1F2937;
+    background: var(--bremen-red);
 }
 .btn-download {
     background: #3B82F6;
@@ -599,10 +599,12 @@ textarea { height: 120px; resize: vertical; }
     transform: translateX(-50%);
     width: 90%; max-width: 500px;
     z-index: 90;
+    display: flex;
+    gap: 10px;
 }
 
 .nav-btn {
-    width: 100%;
+    flex: 1;
     background: white;
     border: none;
     border-radius: var(--radius-l);

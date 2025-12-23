@@ -32,9 +32,6 @@
                 <i class="ph-fill ph-key" style="transform: rotate(45deg);" aria-hidden="true"></i>
                 <h1>KI-Berufs-Beratung <span class="bremen-text">Bremen</span></h1>
             </div>
-            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Dark Mode umschalten">
-                <i class="ph-bold ph-moon" id="darkModeIcon"></i>
-            </button>
         </div>
         <div class="progress-wrapper" role="progressbar" aria-label="Quiz-Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-bar" id="progressBar">
@@ -235,11 +232,18 @@
     </main>
 
     <nav class="bottom-nav" role="navigation" aria-label="Hauptnavigation">
-        <button class="nav-btn" onclick="openInfo()" aria-label="Praktikum und Hilfe Links anzeigen">
+        <button class="nav-btn" onclick="openInfo()" aria-label="weitere Hilfe Links anzeigen">
             <div class="nav-icon"><i class="ph-fill ph-magnifying-glass" aria-hidden="true"></i></div>
             <div class="nav-text">
-                <strong>Praktikum & Hilfe</strong>
+                <strong>weitere Hilfe</strong>
                 <span>Links anzeigen</span>
+            </div>
+        </button>
+        <button id="darkModeToggle" class="nav-btn dark-mode-nav-btn" aria-label="Dark Mode umschalten" title="Dark Mode umschalten">
+            <div class="nav-icon"><i class="ph-bold ph-moon" id="darkModeIcon"></i></div>
+            <div class="nav-text">
+                <strong>Dark Mode</strong>
+                <span>Umschalten</span>
             </div>
         </button>
     </nav>
