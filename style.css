@@ -31,6 +31,19 @@ body {
     padding-bottom: 100px; /* Platz für Bottom Nav */
 }
 
+/* Neu: Für Screen-Reader-Only-Text (minimal) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* --- Header --- */
 header {
     background: rgba(255, 255, 255, 0.95);
@@ -272,99 +285,6 @@ textarea { height: 120px; resize: vertical; }
 }
 .btn-copy:active, .btn-download:active, .btn-save:active { transform: scale(0.98); }
 
-/* --- Profil-Zusammenfassung --- */
-.profile-visualization {
-    margin: 25px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#radarChart {
-    max-width: 100%;
-    height: auto;
-}
-
-.profile-summary {
-    text-align: left;
-    margin: 25px 0;
-}
-.summary-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.summary-section h4 {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.strength-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.strength-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.strength-label {
-    min-width: 100px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-.strength-bar {
-    flex: 1;
-    height: 8px;
-    background: #E5E7EB;
-    border-radius: 4px;
-    overflow: hidden;
-}
-.strength-fill {
-    height: 100%;
-    background: var(--bremen-red);
-    transition: width 0.5s ease;
-}
-.strength-value {
-    min-width: 45px;
-    text-align: right;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.all-categories {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.category-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    background: #F9FAFB;
-    border-radius: var(--radius-s);
-}
-.category-emoji {
-    font-size: 1.2rem;
-    width: 24px;
-    text-align: center;
-}
-.category-name {
-    flex: 1;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-.category-score {
-    font-weight: 700;
-    color: var(--bremen-red);
-    font-size: 0.9rem;
-}
-
-
 /* --- Toast Notifications --- */
 .toast {
     position: fixed;
@@ -457,7 +377,6 @@ textarea { height: 120px; resize: vertical; }
 .btn-load:active, .btn-delete:active {
     transform: scale(0.95);
 }
-
 /* --- AI Links Section --- */
 .ai-links-section {
     text-align: left;
@@ -551,3 +470,4 @@ textarea { height: 120px; resize: vertical; }
     h2 { font-size: 1.3rem; }
     .btn-primary { font-size: 1rem; padding: 14px; }
 }
+
