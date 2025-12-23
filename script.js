@@ -169,10 +169,14 @@ function openInfo() {
         }
     }
     showScreen('info');
+    // Bottom-Nav ausblenden im Info-Screen
+    document.querySelector('.bottom-nav').style.display = 'none';
 }
 
 function closeInfo() {
     showScreen(lastActiveScreen);
+    // Bottom-Nav wieder einblenden
+    document.querySelector('.bottom-nav').style.display = 'flex';
 }
 
 function updateProgressBar() {
