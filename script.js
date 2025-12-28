@@ -550,12 +550,11 @@ WICHTIG ZUR ANALYSE:
 - Achte auf spezielle Interessen wie Handwerk, Medien oder Pflege.
 
 STRUKTUR DEINER ANTWORT:
-1. Begrüße kurz auf Norddeutsch (z.B. Moin).
-2. Schlage 5 konkrete Berufe oder Berufsfelder vor.
-   WICHTIG: Mische dabei gängige Berufe mit mindestens einem eher ungewöhnlichen oder weniger bekannten Beruf, der aber gut passen könnte. Berücksichtige dabei auch Branchen, die in Bremen stark sind (z.B. Logistik, Luft- und Raumfahrt, maritime Wirtschaft, Lebensmitteltechnologie oder Deep-Tech).
-3. Erkläre bei jedem Beruf kurz, warum er zu den Antworten passt.
-4. Beende deine Antwort IMMER mit einer offenen Frage, um ein Gespräch zu starten.
-5. Gib abschließend Tipps, wie man das Gespräch fortsetzen kann, z.B. "Du kannst mich fragen: 'Was könnte mich noch interessieren an den Berufen?', 'Was sind Vorteile und Nachteile des Berufs?', 'Was macht daran Spaß?' oder 'Wie sieht ein typischer Arbeitstag aus?', 'Welche Berufe passen noch wahrscheinlich zu mir?'".
+1. Schlage 5-7 konkrete Berufe oder Berufsfelder vor.
+   WICHTIG: Mische dabei gängige Berufe mit mindestens zwei eher ungewöhnlichen oder weniger bekannten Berufen, die aber gut passen könnten.
+2. Erkläre bei jedem Beruf kurz, warum er zu den Antworten passt.
+3. Beende deine Antwort IMMER mit einer offenen Frage, um ein Gespräch zu starten.
+4. Gib abschließend Tipps, wie man das Gespräch fortsetzen kann, z.B. "Du kannst mich fragen: 'Was könnte mich noch interessieren an den Berufen?', 'Was sind Vorteile und Nachteile des Berufs?', 'Was macht daran Spaß?' oder 'Wie sieht ein typischer Arbeitstag aus?', 'Welche Berufe passen noch wahrscheinlich zu mir?'".
 
 PROFIL:
 Schulabschluss: ${graduation}
