@@ -367,6 +367,8 @@ textarea { height: 120px; resize: vertical; }
 .emoji { font-size: 2rem; }
 .label { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
 
+.dark-mode .label { color: #ffffff; }
+
 .category-badge {
     background: var(--bremen-red-light);
     color: var(--bremen-red);
