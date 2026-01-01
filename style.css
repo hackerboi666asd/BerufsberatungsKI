@@ -364,6 +364,10 @@ textarea { height: 120px; resize: vertical; }
 .option-btn:active { transform: scale(0.95); }
 .option-btn:hover { background: white; border-color: #E5E7EB; box-shadow: var(--shadow-soft); }
 
+.dark-mode .option-btn { background: var(--bg-card-dark); }
+
+.dark-mode .option-btn:hover { background: var(--bg-card-dark); border-color: var(--border-dark); }
+
 .emoji { font-size: 2rem; }
 .label { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
 
